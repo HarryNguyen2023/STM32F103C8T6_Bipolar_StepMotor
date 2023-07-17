@@ -35,8 +35,10 @@ void commandExec(uint16_t data_size);
 // Define the length of the receive buffer
 #define BUFFER_SIZE 5
 uint8_t rcv_buffer[BUFFER_SIZE] = {0};
-char send_msg[30];
+uint8_t send_msg[30];
+
 uint8_t mode = 0;
+uint8_t command;
 // The initial direction of the motor
 uint8_t dir = 1;
 
@@ -49,6 +51,9 @@ int main(void)
   MX_DMA_Init();
   MX_USART1_UART_Init();
   
+  // Initiate the delay module
+  DWT_Delay_Init();
+
   // Configure the USART DMA module
   HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rcv_buffer, BUFFER_SIZE);
   // Disable the half transfer interrupt
@@ -59,7 +64,10 @@ int main(void)
   while (1)
   {
     if(mode == speed)
-      speedCtrl(rcv_buffer[0]);
+    {
+      command = rcv_buffer[0];
+      speedCtrl(command);
+    }   
   }
   /* USER CODE END 3 */
   return 0;
@@ -78,12 +86,14 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
   // Check if data come on USART1 channel
   if(huart->Instance == USART1)
   {
+    // Send back receive messagefor debugging
+    sprintf(send_msg,"Received: %s Size: %u\r\n",rcv_buffer,Size);
+    HAL_UART_Transmit(huart, send_msg, strlen(send_msg), 100);
+
     // Restart the receipt
     HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rcv_buffer, BUFFER_SIZE);
     __HAL_DMA_DISABLE_IT(&hdma_usart1_rx, DMA_IT_HT);
-    // Send back receive messagefor debugging
-    sprintf(send_msg,"Received: %s Size: %u\r\n",rcv_buffer,Size);
-    HAL_UART_Transmit(&huart, send_msg, strlen(send_msg), 100);
+
     // Hadling the command from PC
     commandExec(Size); 
   }

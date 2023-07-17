@@ -1,5 +1,4 @@
 #include "StepMotor.h"
-#include "../util/DWT_Delay.h"
 
 // Function to initiate the step motor module
 void stepInit()

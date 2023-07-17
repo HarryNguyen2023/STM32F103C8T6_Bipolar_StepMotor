@@ -5,6 +5,7 @@
 #define STEP_MOTOR
 
 #include "stm32f1xx_hal.h"
+#include "../util/DWT_Delay.h"
 
 // Define the resolution of the step motor
 #define RES 1.8
@@ -12,8 +13,8 @@
 // Define the pins connect to the motor driver
 #define PORT GPIOB
 #define EN GPIO_PIN_3
-#define DIR GPIO_PIN_4
-#define STEP GPIO_PIN_5
+#define DIR GPIO_PIN_5
+#define STEP GPIO_PIN_4
 #define STOP GPIO_PIN_6
 
 // Define command to control the step motor
