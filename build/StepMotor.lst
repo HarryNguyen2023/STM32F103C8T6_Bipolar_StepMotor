@@ -1,0 +1,957 @@
+ARM GAS  C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"StepMotor.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.stepInit,"ax",%progbits
+  18              		.align	1
+  19              		.global	stepInit
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	stepInit:
+  25              	.LFB67:
+  26              		.file 1 "ECUAL/StepMotor/StepMotor.c"
+   1:ECUAL/StepMotor/StepMotor.c **** #include "StepMotor.h"
+   2:ECUAL/StepMotor/StepMotor.c **** #include "../util/DWT_Delay.h"
+   3:ECUAL/StepMotor/StepMotor.c **** 
+   4:ECUAL/StepMotor/StepMotor.c **** // Function to initiate the step motor module
+   5:ECUAL/StepMotor/StepMotor.c **** void stepInit()
+   6:ECUAL/StepMotor/StepMotor.c **** {
+  27              		.loc 1 6 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 10B5     		push	{r4, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 4, -8
+  35              		.cfi_offset 14, -4
+   7:ECUAL/StepMotor/StepMotor.c ****     // Enable the motor driver
+   8:ECUAL/StepMotor/StepMotor.c ****     HAL_GPIO_WritePin(PORT, EN, 0);
+  36              		.loc 1 8 5 view .LVU1
+  37 0002 084C     		ldr	r4, .L3
+  38 0004 0022     		movs	r2, #0
+  39 0006 0821     		movs	r1, #8
+  40 0008 2046     		mov	r0, r4
+  41 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
+  42              	.LVL0:
+   9:ECUAL/StepMotor/StepMotor.c ****     // Intiiate the direction of the motor
+  10:ECUAL/StepMotor/StepMotor.c ****     HAL_GPIO_WritePin(PORT, DIR, 1);
+  43              		.loc 1 10 5 view .LVU2
+  44 000e 0122     		movs	r2, #1
+  45 0010 1021     		movs	r1, #16
+  46 0012 2046     		mov	r0, r4
+  47 0014 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  48              	.LVL1:
+ARM GAS  C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s 			page 2
+
+
+  11:ECUAL/StepMotor/StepMotor.c ****     // Initiate the step pin
+  12:ECUAL/StepMotor/StepMotor.c ****     HAL_GPIO_WritePin(PORT, STEP, 0);
+  49              		.loc 1 12 5 view .LVU3
+  50 0018 0022     		movs	r2, #0
+  51 001a 2021     		movs	r1, #32
+  52 001c 2046     		mov	r0, r4
+  53 001e FFF7FEFF 		bl	HAL_GPIO_WritePin
+  54              	.LVL2:
+  13:ECUAL/StepMotor/StepMotor.c **** }
+  55              		.loc 1 13 1 is_stmt 0 view .LVU4
+  56 0022 10BD     		pop	{r4, pc}
+  57              	.L4:
+  58              		.align	2
+  59              	.L3:
+  60 0024 000C0140 		.word	1073810432
+  61              		.cfi_endproc
+  62              	.LFE67:
+  64              		.section	.text.brake,"ax",%progbits
+  65              		.align	1
+  66              		.global	brake
+  67              		.syntax unified
+  68              		.thumb
+  69              		.thumb_func
+  71              	brake:
+  72              	.LFB68:
+  14:ECUAL/StepMotor/StepMotor.c **** 
+  15:ECUAL/StepMotor/StepMotor.c **** // Function to stop the motor immediately
+  16:ECUAL/StepMotor/StepMotor.c **** void brake()
+  17:ECUAL/StepMotor/StepMotor.c **** {
+  73              		.loc 1 17 1 is_stmt 1 view -0
+  74              		.cfi_startproc
+  75              		@ args = 0, pretend = 0, frame = 0
+  76              		@ frame_needed = 0, uses_anonymous_args = 0
+  77 0000 10B5     		push	{r4, lr}
+  78              	.LCFI1:
+  79              		.cfi_def_cfa_offset 8
+  80              		.cfi_offset 4, -8
+  81              		.cfi_offset 14, -4
+  18:ECUAL/StepMotor/StepMotor.c ****     // Disable the motor driver
+  19:ECUAL/StepMotor/StepMotor.c ****     HAL_GPIO_WritePin(PORT, EN, 1);
+  82              		.loc 1 19 5 view .LVU6
+  83 0002 064C     		ldr	r4, .L7
+  84 0004 0122     		movs	r2, #1
+  85 0006 0821     		movs	r1, #8
+  86 0008 2046     		mov	r0, r4
+  87 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
+  88              	.LVL3:
+  20:ECUAL/StepMotor/StepMotor.c ****     // Initiate the step pin
+  21:ECUAL/StepMotor/StepMotor.c ****     HAL_GPIO_WritePin(PORT, STEP, 0);
+  89              		.loc 1 21 5 view .LVU7
+  90 000e 0022     		movs	r2, #0
+  91 0010 2021     		movs	r1, #32
+  92 0012 2046     		mov	r0, r4
+  93 0014 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  94              	.LVL4:
+  22:ECUAL/StepMotor/StepMotor.c **** }
+  95              		.loc 1 22 1 is_stmt 0 view .LVU8
+ARM GAS  C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s 			page 3
+
+
+  96 0018 10BD     		pop	{r4, pc}
+  97              	.L8:
+  98 001a 00BF     		.align	2
+  99              	.L7:
+ 100 001c 000C0140 		.word	1073810432
+ 101              		.cfi_endproc
+ 102              	.LFE68:
+ 104              		.section	.text.changeDir,"ax",%progbits
+ 105              		.align	1
+ 106              		.global	changeDir
+ 107              		.syntax unified
+ 108              		.thumb
+ 109              		.thumb_func
+ 111              	changeDir:
+ 112              	.LVL5:
+ 113              	.LFB69:
+  23:ECUAL/StepMotor/StepMotor.c **** 
+  24:ECUAL/StepMotor/StepMotor.c **** // Function to change the direction of the motor
+  25:ECUAL/StepMotor/StepMotor.c **** void changeDir(uint8_t* cur_dir)
+  26:ECUAL/StepMotor/StepMotor.c **** {
+ 114              		.loc 1 26 1 is_stmt 1 view -0
+ 115              		.cfi_startproc
+ 116              		@ args = 0, pretend = 0, frame = 0
+ 117              		@ frame_needed = 0, uses_anonymous_args = 0
+ 118              		.loc 1 26 1 is_stmt 0 view .LVU10
+ 119 0000 08B5     		push	{r3, lr}
+ 120              	.LCFI2:
+ 121              		.cfi_def_cfa_offset 8
+ 122              		.cfi_offset 3, -8
+ 123              		.cfi_offset 14, -4
+  27:ECUAL/StepMotor/StepMotor.c ****     *cur_dir =  1 - *cur_dir;
+ 124              		.loc 1 27 5 is_stmt 1 view .LVU11
+ 125              		.loc 1 27 21 is_stmt 0 view .LVU12
+ 126 0002 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
+ 127              		.loc 1 27 19 view .LVU13
+ 128 0004 C2F10102 		rsb	r2, r2, #1
+ 129 0008 D2B2     		uxtb	r2, r2
+ 130              		.loc 1 27 14 view .LVU14
+ 131 000a 0270     		strb	r2, [r0]
+  28:ECUAL/StepMotor/StepMotor.c ****     // Change the state of the DIR pin
+  29:ECUAL/StepMotor/StepMotor.c ****     HAL_GPIO_WritePin(PORT, DIR, *cur_dir);
+ 132              		.loc 1 29 5 is_stmt 1 view .LVU15
+ 133 000c 1021     		movs	r1, #16
+ 134 000e 0248     		ldr	r0, .L11
+ 135              	.LVL6:
+ 136              		.loc 1 29 5 is_stmt 0 view .LVU16
+ 137 0010 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 138              	.LVL7:
+  30:ECUAL/StepMotor/StepMotor.c **** }
+ 139              		.loc 1 30 1 view .LVU17
+ 140 0014 08BD     		pop	{r3, pc}
+ 141              	.L12:
+ 142 0016 00BF     		.align	2
+ 143              	.L11:
+ 144 0018 000C0140 		.word	1073810432
+ 145              		.cfi_endproc
+ 146              	.LFE69:
+ARM GAS  C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s 			page 4
+
+
+ 148              		.section	.text.speedCtrl,"ax",%progbits
+ 149              		.align	1
+ 150              		.global	speedCtrl
+ 151              		.syntax unified
+ 152              		.thumb
+ 153              		.thumb_func
+ 155              	speedCtrl:
+ 156              	.LVL8:
+ 157              	.LFB70:
+  31:ECUAL/StepMotor/StepMotor.c **** 
+  32:ECUAL/StepMotor/StepMotor.c **** // Function to change the speed of the motor
+  33:ECUAL/StepMotor/StepMotor.c **** void speedCtrl(uint8_t com)
+  34:ECUAL/StepMotor/StepMotor.c **** {
+ 158              		.loc 1 34 1 is_stmt 1 view -0
+ 159              		.cfi_startproc
+ 160              		@ args = 0, pretend = 0, frame = 0
+ 161              		@ frame_needed = 0, uses_anonymous_args = 0
+ 162              		.loc 1 34 1 is_stmt 0 view .LVU19
+ 163 0000 38B5     		push	{r3, r4, r5, lr}
+ 164              	.LCFI3:
+ 165              		.cfi_def_cfa_offset 16
+ 166              		.cfi_offset 3, -16
+ 167              		.cfi_offset 4, -12
+ 168              		.cfi_offset 5, -8
+ 169              		.cfi_offset 14, -4
+  35:ECUAL/StepMotor/StepMotor.c ****     switch (com)
+ 170              		.loc 1 35 5 is_stmt 1 view .LVU20
+ 171 0002 3228     		cmp	r0, #50
+ 172 0004 33D0     		beq	.L14
+ 173 0006 3328     		cmp	r0, #51
+ 174 0008 60D0     		beq	.L15
+ 175 000a 3128     		cmp	r0, #49
+ 176 000c 00D0     		beq	.L24
+ 177              	.LVL9:
+ 178              	.L13:
+  36:ECUAL/StepMotor/StepMotor.c ****     {
+  37:ECUAL/StepMotor/StepMotor.c ****         case speed1:
+  38:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(PORT, STEP, 0);
+  39:ECUAL/StepMotor/StepMotor.c ****             DWT_Delay_us(1000);
+  40:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(PORT, STEP, 1);
+  41:ECUAL/StepMotor/StepMotor.c ****             DWT_Delay_us(1000);
+  42:ECUAL/StepMotor/StepMotor.c ****             break;
+  43:ECUAL/StepMotor/StepMotor.c ****         
+  44:ECUAL/StepMotor/StepMotor.c ****         case speed2:
+  45:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(PORT, STEP, 0);
+  46:ECUAL/StepMotor/StepMotor.c ****             DWT_Delay_us(750);
+  47:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(PORT, STEP, 1);
+  48:ECUAL/StepMotor/StepMotor.c ****             DWT_Delay_us(750);
+  49:ECUAL/StepMotor/StepMotor.c ****             break;
+  50:ECUAL/StepMotor/StepMotor.c ****         
+  51:ECUAL/StepMotor/StepMotor.c ****         case speed3:
+  52:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(PORT, STEP, 0);
+  53:ECUAL/StepMotor/StepMotor.c ****             DWT_Delay_us(500);
+  54:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(PORT, STEP, 1);
+  55:ECUAL/StepMotor/StepMotor.c ****             DWT_Delay_us(500);
+  56:ECUAL/StepMotor/StepMotor.c ****             break;
+  57:ECUAL/StepMotor/StepMotor.c ****     }
+ARM GAS  C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s 			page 5
+
+
+  58:ECUAL/StepMotor/StepMotor.c **** }
+ 179              		.loc 1 58 1 is_stmt 0 view .LVU21
+ 180 000e 38BD     		pop	{r3, r4, r5, pc}
+ 181              	.LVL10:
+ 182              	.L24:
+  38:ECUAL/StepMotor/StepMotor.c ****             DWT_Delay_us(1000);
+ 183              		.loc 1 38 13 is_stmt 1 view .LVU22
+ 184 0010 0022     		movs	r2, #0
+ 185 0012 2021     		movs	r1, #32
+ 186 0014 4548     		ldr	r0, .L25
+ 187              	.LVL11:
+  38:ECUAL/StepMotor/StepMotor.c ****             DWT_Delay_us(1000);
+ 188              		.loc 1 38 13 is_stmt 0 view .LVU23
+ 189 0016 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 190              	.LVL12:
+  39:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(PORT, STEP, 1);
+ 191              		.loc 1 39 13 is_stmt 1 view .LVU24
+ 192 001a 4FF47A74 		mov	r4, #1000
+ 193              	.LVL13:
+ 194              	.LBB14:
+ 195              	.LBI14:
+ 196              		.file 2 "util/../util/DWT_Delay.h"
+   1:util/../util/DWT_Delay.h **** /*
+   2:util/../util/DWT_Delay.h ****  * File: DWT_Delay.h
+   3:util/../util/DWT_Delay.h ****  * Driver Name: [[ DWT Delay ]]
+   4:util/../util/DWT_Delay.h ****  * SW Layer:   ECUAL
+   5:util/../util/DWT_Delay.h ****  * Created on: Jun 28, 2020
+   6:util/../util/DWT_Delay.h ****  * Author:     Khaled Magdy
+   7:util/../util/DWT_Delay.h ****  * -------------------------------------------
+   8:util/../util/DWT_Delay.h ****  * For More Information, Tutorials, etc.
+   9:util/../util/DWT_Delay.h ****  * Visit Website: www.DeepBlueMbedded.com
+  10:util/../util/DWT_Delay.h ****  *
+  11:util/../util/DWT_Delay.h ****  */
+  12:util/../util/DWT_Delay.h **** 
+  13:util/../util/DWT_Delay.h **** #ifndef DWT_DELAY_H_
+  14:util/../util/DWT_Delay.h **** #define DWT_DELAY_H_
+  15:util/../util/DWT_Delay.h **** 
+  16:util/../util/DWT_Delay.h **** #include "stm32f1xx_hal.h"
+  17:util/../util/DWT_Delay.h **** 
+  18:util/../util/DWT_Delay.h **** 
+  19:util/../util/DWT_Delay.h **** uint32_t DWT_Delay_Init(void);
+  20:util/../util/DWT_Delay.h **** 
+  21:util/../util/DWT_Delay.h **** 
+  22:util/../util/DWT_Delay.h **** // This Function Provides Delay In Microseconds Using DWT
+  23:util/../util/DWT_Delay.h **** __STATIC_INLINE void DWT_Delay_us(volatile uint32_t au32_microseconds)
+ 197              		.loc 2 23 22 view .LVU25
+ 198              	.LBB15:
+  24:util/../util/DWT_Delay.h **** {
+  25:util/../util/DWT_Delay.h ****   uint32_t au32_initial_ticks = DWT->CYCCNT;
+ 199              		.loc 2 25 3 view .LVU26
+ 200              		.loc 2 25 12 is_stmt 0 view .LVU27
+ 201 001e 444B     		ldr	r3, .L25+4
+ 202 0020 5D68     		ldr	r5, [r3, #4]
+ 203              	.LVL14:
+  26:util/../util/DWT_Delay.h ****   uint32_t au32_ticks = (HAL_RCC_GetHCLKFreq() / 1000000);
+ 204              		.loc 2 26 3 is_stmt 1 view .LVU28
+ 205              		.loc 2 26 26 is_stmt 0 view .LVU29
+ARM GAS  C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s 			page 6
+
+
+ 206 0022 FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
+ 207              	.LVL15:
+ 208              		.loc 2 26 12 view .LVU30
+ 209 0026 4349     		ldr	r1, .L25+8
+ 210 0028 A1FB0031 		umull	r3, r1, r1, r0
+ 211 002c 890C     		lsrs	r1, r1, #18
+ 212              	.LVL16:
+  27:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
+ 213              		.loc 2 27 3 is_stmt 1 view .LVU31
+ 214              		.loc 2 27 21 is_stmt 0 view .LVU32
+ 215 002e 01FB04F4 		mul	r4, r1, r4
+  28:util/../util/DWT_Delay.h ****   while ((DWT->CYCCNT - au32_initial_ticks) < au32_microseconds-au32_ticks);
+ 216              		.loc 2 28 3 is_stmt 1 view .LVU33
+ 217              	.L17:
+ 218              		.loc 2 28 76 view .LVU34
+ 219              		.loc 2 28 9 view .LVU35
+ 220              		.loc 2 28 14 is_stmt 0 view .LVU36
+ 221 0032 3F4B     		ldr	r3, .L25+4
+ 222 0034 5B68     		ldr	r3, [r3, #4]
+ 223              		.loc 2 28 23 view .LVU37
+ 224 0036 5B1B     		subs	r3, r3, r5
+ 225              		.loc 2 28 64 view .LVU38
+ 226 0038 621A     		subs	r2, r4, r1
+ 227              		.loc 2 28 9 view .LVU39
+ 228 003a 9342     		cmp	r3, r2
+ 229 003c F9D3     		bcc	.L17
+ 230              	.LVL17:
+ 231              		.loc 2 28 9 view .LVU40
+ 232              	.LBE15:
+ 233              	.LBE14:
+  40:ECUAL/StepMotor/StepMotor.c ****             DWT_Delay_us(1000);
+ 234              		.loc 1 40 13 is_stmt 1 view .LVU41
+ 235 003e 0122     		movs	r2, #1
+ 236 0040 2021     		movs	r1, #32
+ 237 0042 3A48     		ldr	r0, .L25
+ 238 0044 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 239              	.LVL18:
+  41:ECUAL/StepMotor/StepMotor.c ****             break;
+ 240              		.loc 1 41 13 view .LVU42
+ 241 0048 4FF47A74 		mov	r4, #1000
+ 242              	.LVL19:
+ 243              	.LBB16:
+ 244              	.LBI16:
+  23:util/../util/DWT_Delay.h **** {
+ 245              		.loc 2 23 22 view .LVU43
+ 246              	.LBB17:
+  25:util/../util/DWT_Delay.h ****   uint32_t au32_ticks = (HAL_RCC_GetHCLKFreq() / 1000000);
+ 247              		.loc 2 25 3 view .LVU44
+  25:util/../util/DWT_Delay.h ****   uint32_t au32_ticks = (HAL_RCC_GetHCLKFreq() / 1000000);
+ 248              		.loc 2 25 12 is_stmt 0 view .LVU45
+ 249 004c 384B     		ldr	r3, .L25+4
+ 250 004e 5D68     		ldr	r5, [r3, #4]
+ 251              	.LVL20:
+  26:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
+ 252              		.loc 2 26 3 is_stmt 1 view .LVU46
+  26:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
+ 253              		.loc 2 26 26 is_stmt 0 view .LVU47
+ARM GAS  C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s 			page 7
+
+
+ 254 0050 FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
+ 255              	.LVL21:
+  26:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
+ 256              		.loc 2 26 12 view .LVU48
+ 257 0054 3749     		ldr	r1, .L25+8
+ 258 0056 A1FB0031 		umull	r3, r1, r1, r0
+ 259 005a 890C     		lsrs	r1, r1, #18
+ 260              	.LVL22:
+  27:util/../util/DWT_Delay.h ****   while ((DWT->CYCCNT - au32_initial_ticks) < au32_microseconds-au32_ticks);
+ 261              		.loc 2 27 3 is_stmt 1 view .LVU49
+  27:util/../util/DWT_Delay.h ****   while ((DWT->CYCCNT - au32_initial_ticks) < au32_microseconds-au32_ticks);
+ 262              		.loc 2 27 21 is_stmt 0 view .LVU50
+ 263 005c 01FB04F4 		mul	r4, r1, r4
+ 264              		.loc 2 28 3 is_stmt 1 view .LVU51
+ 265              	.L18:
+ 266              		.loc 2 28 76 view .LVU52
+ 267              		.loc 2 28 9 view .LVU53
+ 268              		.loc 2 28 14 is_stmt 0 view .LVU54
+ 269 0060 334B     		ldr	r3, .L25+4
+ 270 0062 5B68     		ldr	r3, [r3, #4]
+ 271              		.loc 2 28 23 view .LVU55
+ 272 0064 5B1B     		subs	r3, r3, r5
+ 273              		.loc 2 28 64 view .LVU56
+ 274 0066 621A     		subs	r2, r4, r1
+ 275              		.loc 2 28 9 view .LVU57
+ 276 0068 9342     		cmp	r3, r2
+ 277 006a F9D3     		bcc	.L18
+ 278 006c CFE7     		b	.L13
+ 279              	.LVL23:
+ 280              	.L14:
+ 281              		.loc 2 28 9 view .LVU58
+ 282              	.LBE17:
+ 283              	.LBE16:
+  45:ECUAL/StepMotor/StepMotor.c ****             DWT_Delay_us(750);
+ 284              		.loc 1 45 13 is_stmt 1 view .LVU59
+ 285 006e 0022     		movs	r2, #0
+ 286 0070 2021     		movs	r1, #32
+ 287 0072 2E48     		ldr	r0, .L25
+ 288              	.LVL24:
+  45:ECUAL/StepMotor/StepMotor.c ****             DWT_Delay_us(750);
+ 289              		.loc 1 45 13 is_stmt 0 view .LVU60
+ 290 0074 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 291              	.LVL25:
+  46:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(PORT, STEP, 1);
+ 292              		.loc 1 46 13 is_stmt 1 view .LVU61
+ 293 0078 40F2EE24 		movw	r4, #750
+ 294              	.LVL26:
+ 295              	.LBB18:
+ 296              	.LBI18:
+  23:util/../util/DWT_Delay.h **** {
+ 297              		.loc 2 23 22 view .LVU62
+ 298              	.LBB19:
+  25:util/../util/DWT_Delay.h ****   uint32_t au32_ticks = (HAL_RCC_GetHCLKFreq() / 1000000);
+ 299              		.loc 2 25 3 view .LVU63
+  25:util/../util/DWT_Delay.h ****   uint32_t au32_ticks = (HAL_RCC_GetHCLKFreq() / 1000000);
+ 300              		.loc 2 25 12 is_stmt 0 view .LVU64
+ 301 007c 2C4B     		ldr	r3, .L25+4
+ARM GAS  C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s 			page 8
+
+
+ 302 007e 5D68     		ldr	r5, [r3, #4]
+ 303              	.LVL27:
+  26:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
+ 304              		.loc 2 26 3 is_stmt 1 view .LVU65
+  26:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
+ 305              		.loc 2 26 26 is_stmt 0 view .LVU66
+ 306 0080 FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
+ 307              	.LVL28:
+  26:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
+ 308              		.loc 2 26 12 view .LVU67
+ 309 0084 2B49     		ldr	r1, .L25+8
+ 310 0086 A1FB0031 		umull	r3, r1, r1, r0
+ 311 008a 890C     		lsrs	r1, r1, #18
+ 312              	.LVL29:
+  27:util/../util/DWT_Delay.h ****   while ((DWT->CYCCNT - au32_initial_ticks) < au32_microseconds-au32_ticks);
+ 313              		.loc 2 27 3 is_stmt 1 view .LVU68
+  27:util/../util/DWT_Delay.h ****   while ((DWT->CYCCNT - au32_initial_ticks) < au32_microseconds-au32_ticks);
+ 314              		.loc 2 27 21 is_stmt 0 view .LVU69
+ 315 008c 01FB04F4 		mul	r4, r1, r4
+ 316              		.loc 2 28 3 is_stmt 1 view .LVU70
+ 317              	.L19:
+ 318              		.loc 2 28 76 view .LVU71
+ 319              		.loc 2 28 9 view .LVU72
+ 320              		.loc 2 28 14 is_stmt 0 view .LVU73
+ 321 0090 274B     		ldr	r3, .L25+4
+ 322 0092 5B68     		ldr	r3, [r3, #4]
+ 323              		.loc 2 28 23 view .LVU74
+ 324 0094 5B1B     		subs	r3, r3, r5
+ 325              		.loc 2 28 64 view .LVU75
+ 326 0096 621A     		subs	r2, r4, r1
+ 327              		.loc 2 28 9 view .LVU76
+ 328 0098 9342     		cmp	r3, r2
+ 329 009a F9D3     		bcc	.L19
+ 330              	.LVL30:
+ 331              		.loc 2 28 9 view .LVU77
+ 332              	.LBE19:
+ 333              	.LBE18:
+  47:ECUAL/StepMotor/StepMotor.c ****             DWT_Delay_us(750);
+ 334              		.loc 1 47 13 is_stmt 1 view .LVU78
+ 335 009c 0122     		movs	r2, #1
+ 336 009e 2021     		movs	r1, #32
+ 337 00a0 2248     		ldr	r0, .L25
+ 338 00a2 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 339              	.LVL31:
+  48:ECUAL/StepMotor/StepMotor.c ****             break;
+ 340              		.loc 1 48 13 view .LVU79
+ 341 00a6 40F2EE24 		movw	r4, #750
+ 342              	.LVL32:
+ 343              	.LBB20:
+ 344              	.LBI20:
+  23:util/../util/DWT_Delay.h **** {
+ 345              		.loc 2 23 22 view .LVU80
+ 346              	.LBB21:
+  25:util/../util/DWT_Delay.h ****   uint32_t au32_ticks = (HAL_RCC_GetHCLKFreq() / 1000000);
+ 347              		.loc 2 25 3 view .LVU81
+  25:util/../util/DWT_Delay.h ****   uint32_t au32_ticks = (HAL_RCC_GetHCLKFreq() / 1000000);
+ 348              		.loc 2 25 12 is_stmt 0 view .LVU82
+ARM GAS  C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s 			page 9
+
+
+ 349 00aa 214B     		ldr	r3, .L25+4
+ 350 00ac 5D68     		ldr	r5, [r3, #4]
+ 351              	.LVL33:
+  26:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
+ 352              		.loc 2 26 3 is_stmt 1 view .LVU83
+  26:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
+ 353              		.loc 2 26 26 is_stmt 0 view .LVU84
+ 354 00ae FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
+ 355              	.LVL34:
+  26:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
+ 356              		.loc 2 26 12 view .LVU85
+ 357 00b2 2049     		ldr	r1, .L25+8
+ 358 00b4 A1FB0031 		umull	r3, r1, r1, r0
+ 359 00b8 890C     		lsrs	r1, r1, #18
+ 360              	.LVL35:
+  27:util/../util/DWT_Delay.h ****   while ((DWT->CYCCNT - au32_initial_ticks) < au32_microseconds-au32_ticks);
+ 361              		.loc 2 27 3 is_stmt 1 view .LVU86
+  27:util/../util/DWT_Delay.h ****   while ((DWT->CYCCNT - au32_initial_ticks) < au32_microseconds-au32_ticks);
+ 362              		.loc 2 27 21 is_stmt 0 view .LVU87
+ 363 00ba 01FB04F4 		mul	r4, r1, r4
+ 364              		.loc 2 28 3 is_stmt 1 view .LVU88
+ 365              	.L20:
+ 366              		.loc 2 28 76 view .LVU89
+ 367              		.loc 2 28 9 view .LVU90
+ 368              		.loc 2 28 14 is_stmt 0 view .LVU91
+ 369 00be 1C4B     		ldr	r3, .L25+4
+ 370 00c0 5B68     		ldr	r3, [r3, #4]
+ 371              		.loc 2 28 23 view .LVU92
+ 372 00c2 5B1B     		subs	r3, r3, r5
+ 373              		.loc 2 28 64 view .LVU93
+ 374 00c4 621A     		subs	r2, r4, r1
+ 375              		.loc 2 28 9 view .LVU94
+ 376 00c6 9342     		cmp	r3, r2
+ 377 00c8 F9D3     		bcc	.L20
+ 378 00ca A0E7     		b	.L13
+ 379              	.LVL36:
+ 380              	.L15:
+ 381              		.loc 2 28 9 view .LVU95
+ 382              	.LBE21:
+ 383              	.LBE20:
+  52:ECUAL/StepMotor/StepMotor.c ****             DWT_Delay_us(500);
+ 384              		.loc 1 52 13 is_stmt 1 view .LVU96
+ 385 00cc 0022     		movs	r2, #0
+ 386 00ce 2021     		movs	r1, #32
+ 387 00d0 1648     		ldr	r0, .L25
+ 388              	.LVL37:
+  52:ECUAL/StepMotor/StepMotor.c ****             DWT_Delay_us(500);
+ 389              		.loc 1 52 13 is_stmt 0 view .LVU97
+ 390 00d2 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 391              	.LVL38:
+  53:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(PORT, STEP, 1);
+ 392              		.loc 1 53 13 is_stmt 1 view .LVU98
+ 393 00d6 4FF4FA74 		mov	r4, #500
+ 394              	.LVL39:
+ 395              	.LBB22:
+ 396              	.LBI22:
+  23:util/../util/DWT_Delay.h **** {
+ARM GAS  C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s 			page 10
+
+
+ 397              		.loc 2 23 22 view .LVU99
+ 398              	.LBB23:
+  25:util/../util/DWT_Delay.h ****   uint32_t au32_ticks = (HAL_RCC_GetHCLKFreq() / 1000000);
+ 399              		.loc 2 25 3 view .LVU100
+  25:util/../util/DWT_Delay.h ****   uint32_t au32_ticks = (HAL_RCC_GetHCLKFreq() / 1000000);
+ 400              		.loc 2 25 12 is_stmt 0 view .LVU101
+ 401 00da 154B     		ldr	r3, .L25+4
+ 402 00dc 5D68     		ldr	r5, [r3, #4]
+ 403              	.LVL40:
+  26:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
+ 404              		.loc 2 26 3 is_stmt 1 view .LVU102
+  26:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
+ 405              		.loc 2 26 26 is_stmt 0 view .LVU103
+ 406 00de FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
+ 407              	.LVL41:
+  26:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
+ 408              		.loc 2 26 12 view .LVU104
+ 409 00e2 1449     		ldr	r1, .L25+8
+ 410 00e4 A1FB0031 		umull	r3, r1, r1, r0
+ 411 00e8 890C     		lsrs	r1, r1, #18
+ 412              	.LVL42:
+  27:util/../util/DWT_Delay.h ****   while ((DWT->CYCCNT - au32_initial_ticks) < au32_microseconds-au32_ticks);
+ 413              		.loc 2 27 3 is_stmt 1 view .LVU105
+  27:util/../util/DWT_Delay.h ****   while ((DWT->CYCCNT - au32_initial_ticks) < au32_microseconds-au32_ticks);
+ 414              		.loc 2 27 21 is_stmt 0 view .LVU106
+ 415 00ea 01FB04F4 		mul	r4, r1, r4
+ 416              		.loc 2 28 3 is_stmt 1 view .LVU107
+ 417              	.L21:
+ 418              		.loc 2 28 76 view .LVU108
+ 419              		.loc 2 28 9 view .LVU109
+ 420              		.loc 2 28 14 is_stmt 0 view .LVU110
+ 421 00ee 104B     		ldr	r3, .L25+4
+ 422 00f0 5B68     		ldr	r3, [r3, #4]
+ 423              		.loc 2 28 23 view .LVU111
+ 424 00f2 5B1B     		subs	r3, r3, r5
+ 425              		.loc 2 28 64 view .LVU112
+ 426 00f4 621A     		subs	r2, r4, r1
+ 427              		.loc 2 28 9 view .LVU113
+ 428 00f6 9342     		cmp	r3, r2
+ 429 00f8 F9D3     		bcc	.L21
+ 430              	.LVL43:
+ 431              		.loc 2 28 9 view .LVU114
+ 432              	.LBE23:
+ 433              	.LBE22:
+  54:ECUAL/StepMotor/StepMotor.c ****             DWT_Delay_us(500);
+ 434              		.loc 1 54 13 is_stmt 1 view .LVU115
+ 435 00fa 0122     		movs	r2, #1
+ 436 00fc 2021     		movs	r1, #32
+ 437 00fe 0B48     		ldr	r0, .L25
+ 438 0100 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 439              	.LVL44:
+  55:ECUAL/StepMotor/StepMotor.c ****             break;
+ 440              		.loc 1 55 13 view .LVU116
+ 441 0104 4FF4FA74 		mov	r4, #500
+ 442              	.LVL45:
+ 443              	.LBB24:
+ 444              	.LBI24:
+ARM GAS  C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s 			page 11
+
+
+  23:util/../util/DWT_Delay.h **** {
+ 445              		.loc 2 23 22 view .LVU117
+ 446              	.LBB25:
+  25:util/../util/DWT_Delay.h ****   uint32_t au32_ticks = (HAL_RCC_GetHCLKFreq() / 1000000);
+ 447              		.loc 2 25 3 view .LVU118
+  25:util/../util/DWT_Delay.h ****   uint32_t au32_ticks = (HAL_RCC_GetHCLKFreq() / 1000000);
+ 448              		.loc 2 25 12 is_stmt 0 view .LVU119
+ 449 0108 094B     		ldr	r3, .L25+4
+ 450 010a 5D68     		ldr	r5, [r3, #4]
+ 451              	.LVL46:
+  26:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
+ 452              		.loc 2 26 3 is_stmt 1 view .LVU120
+  26:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
+ 453              		.loc 2 26 26 is_stmt 0 view .LVU121
+ 454 010c FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
+ 455              	.LVL47:
+  26:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
+ 456              		.loc 2 26 12 view .LVU122
+ 457 0110 0849     		ldr	r1, .L25+8
+ 458 0112 A1FB0031 		umull	r3, r1, r1, r0
+ 459 0116 890C     		lsrs	r1, r1, #18
+ 460              	.LVL48:
+  27:util/../util/DWT_Delay.h ****   while ((DWT->CYCCNT - au32_initial_ticks) < au32_microseconds-au32_ticks);
+ 461              		.loc 2 27 3 is_stmt 1 view .LVU123
+  27:util/../util/DWT_Delay.h ****   while ((DWT->CYCCNT - au32_initial_ticks) < au32_microseconds-au32_ticks);
+ 462              		.loc 2 27 21 is_stmt 0 view .LVU124
+ 463 0118 01FB04F4 		mul	r4, r1, r4
+ 464              		.loc 2 28 3 is_stmt 1 view .LVU125
+ 465              	.L22:
+ 466              		.loc 2 28 76 view .LVU126
+ 467              		.loc 2 28 9 view .LVU127
+ 468              		.loc 2 28 14 is_stmt 0 view .LVU128
+ 469 011c 044B     		ldr	r3, .L25+4
+ 470 011e 5B68     		ldr	r3, [r3, #4]
+ 471              		.loc 2 28 23 view .LVU129
+ 472 0120 5B1B     		subs	r3, r3, r5
+ 473              		.loc 2 28 64 view .LVU130
+ 474 0122 621A     		subs	r2, r4, r1
+ 475              		.loc 2 28 9 view .LVU131
+ 476 0124 9342     		cmp	r3, r2
+ 477 0126 F9D3     		bcc	.L22
+ 478 0128 71E7     		b	.L13
+ 479              	.L26:
+ 480 012a 00BF     		.align	2
+ 481              	.L25:
+ 482 012c 000C0140 		.word	1073810432
+ 483 0130 001000E0 		.word	-536866816
+ 484 0134 83DE1B43 		.word	1125899907
+ 485              	.LBE25:
+ 486              	.LBE24:
+ 487              		.cfi_endproc
+ 488              	.LFE70:
+ 490              		.global	__aeabi_i2d
+ 491              		.global	__aeabi_ddiv
+ 492              		.global	__aeabi_d2uiz
+ 493              		.section	.text.angle2Step,"ax",%progbits
+ 494              		.align	1
+ARM GAS  C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s 			page 12
+
+
+ 495              		.global	angle2Step
+ 496              		.syntax unified
+ 497              		.thumb
+ 498              		.thumb_func
+ 500              	angle2Step:
+ 501              	.LVL49:
+ 502              	.LFB71:
+  59:ECUAL/StepMotor/StepMotor.c **** 
+  60:ECUAL/StepMotor/StepMotor.c **** // Function to convert the input angle value into the number of the step required to move the motor
+  61:ECUAL/StepMotor/StepMotor.c **** uint16_t angle2Step(uint16_t angle)
+  62:ECUAL/StepMotor/StepMotor.c **** {
+ 503              		.loc 1 62 1 is_stmt 1 view -0
+ 504              		.cfi_startproc
+ 505              		@ args = 0, pretend = 0, frame = 0
+ 506              		@ frame_needed = 0, uses_anonymous_args = 0
+ 507              		.loc 1 62 1 is_stmt 0 view .LVU133
+ 508 0000 08B5     		push	{r3, lr}
+ 509              	.LCFI4:
+ 510              		.cfi_def_cfa_offset 8
+ 511              		.cfi_offset 3, -8
+ 512              		.cfi_offset 14, -4
+  63:ECUAL/StepMotor/StepMotor.c ****     if(angle > 65535)
+ 513              		.loc 1 63 5 is_stmt 1 view .LVU134
+  64:ECUAL/StepMotor/StepMotor.c ****         angle = 65535;
+  65:ECUAL/StepMotor/StepMotor.c ****     return angle / RES;
+ 514              		.loc 1 65 5 view .LVU135
+ 515              		.loc 1 65 18 is_stmt 0 view .LVU136
+ 516 0002 FFF7FEFF 		bl	__aeabi_i2d
+ 517              	.LVL50:
+ 518              		.loc 1 65 18 view .LVU137
+ 519 0006 04A3     		adr	r3, .L29
+ 520 0008 D3E90023 		ldrd	r2, [r3]
+ 521 000c FFF7FEFF 		bl	__aeabi_ddiv
+ 522              	.LVL51:
+ 523 0010 FFF7FEFF 		bl	__aeabi_d2uiz
+ 524              	.LVL52:
+  66:ECUAL/StepMotor/StepMotor.c **** }
+ 525              		.loc 1 66 1 view .LVU138
+ 526 0014 80B2     		uxth	r0, r0
+ 527 0016 08BD     		pop	{r3, pc}
+ 528              	.L30:
+ 529              		.align	3
+ 530              	.L29:
+ 531 0018 CDCCCCCC 		.word	-858993459
+ 532 001c CCCCFC3F 		.word	1073532108
+ 533              		.cfi_endproc
+ 534              	.LFE71:
+ 536              		.section	.text.positionCtrl,"ax",%progbits
+ 537              		.align	1
+ 538              		.global	positionCtrl
+ 539              		.syntax unified
+ 540              		.thumb
+ 541              		.thumb_func
+ 543              	positionCtrl:
+ 544              	.LVL53:
+ 545              	.LFB72:
+  67:ECUAL/StepMotor/StepMotor.c **** 
+ARM GAS  C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s 			page 13
+
+
+  68:ECUAL/StepMotor/StepMotor.c **** // Function to control the position of the step motor 
+  69:ECUAL/StepMotor/StepMotor.c **** void positionCtrl(uint16_t step)
+  70:ECUAL/StepMotor/StepMotor.c **** {
+ 546              		.loc 1 70 1 is_stmt 1 view -0
+ 547              		.cfi_startproc
+ 548              		@ args = 0, pretend = 0, frame = 0
+ 549              		@ frame_needed = 0, uses_anonymous_args = 0
+ 550              		.loc 1 70 1 is_stmt 0 view .LVU140
+ 551 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 552              	.LCFI5:
+ 553              		.cfi_def_cfa_offset 24
+ 554              		.cfi_offset 3, -24
+ 555              		.cfi_offset 4, -20
+ 556              		.cfi_offset 5, -16
+ 557              		.cfi_offset 6, -12
+ 558              		.cfi_offset 7, -8
+ 559              		.cfi_offset 14, -4
+ 560 0002 0546     		mov	r5, r0
+  71:ECUAL/StepMotor/StepMotor.c ****     brake();
+ 561              		.loc 1 71 5 is_stmt 1 view .LVU141
+ 562 0004 FFF7FEFF 		bl	brake
+ 563              	.LVL54:
+  72:ECUAL/StepMotor/StepMotor.c ****     stepInit();
+ 564              		.loc 1 72 5 view .LVU142
+ 565 0008 FFF7FEFF 		bl	stepInit
+ 566              	.LVL55:
+  73:ECUAL/StepMotor/StepMotor.c ****     // Loop through the number of step
+  74:ECUAL/StepMotor/StepMotor.c ****     for(uint16_t i = 0; i < step; ++i)
+ 567              		.loc 1 74 5 view .LVU143
+ 568              	.LBB31:
+ 569              		.loc 1 74 9 view .LVU144
+ 570              		.loc 1 74 18 is_stmt 0 view .LVU145
+ 571 000c 0024     		movs	r4, #0
+ 572              	.LVL56:
+ 573              	.L32:
+ 574              		.loc 1 74 25 is_stmt 1 discriminator 1 view .LVU146
+ 575              		.loc 1 74 5 is_stmt 0 discriminator 1 view .LVU147
+ 576 000e AC42     		cmp	r4, r5
+ 577 0010 30D2     		bcs	.L37
+  75:ECUAL/StepMotor/StepMotor.c ****     {
+  76:ECUAL/StepMotor/StepMotor.c ****         HAL_GPIO_WritePin(PORT, STEP, 0);
+ 578              		.loc 1 76 9 is_stmt 1 discriminator 3 view .LVU148
+ 579 0012 0022     		movs	r2, #0
+ 580 0014 2021     		movs	r1, #32
+ 581 0016 1848     		ldr	r0, .L38
+ 582 0018 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 583              	.LVL57:
+  77:ECUAL/StepMotor/StepMotor.c ****         DWT_Delay_us(500);
+ 584              		.loc 1 77 9 discriminator 3 view .LVU149
+ 585 001c 4FF4FA76 		mov	r6, #500
+ 586              	.LVL58:
+ 587              	.LBB32:
+ 588              	.LBI32:
+  23:util/../util/DWT_Delay.h **** {
+ 589              		.loc 2 23 22 discriminator 3 view .LVU150
+ 590              	.LBB33:
+  25:util/../util/DWT_Delay.h ****   uint32_t au32_ticks = (HAL_RCC_GetHCLKFreq() / 1000000);
+ARM GAS  C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s 			page 14
+
+
+ 591              		.loc 2 25 3 discriminator 3 view .LVU151
+  25:util/../util/DWT_Delay.h ****   uint32_t au32_ticks = (HAL_RCC_GetHCLKFreq() / 1000000);
+ 592              		.loc 2 25 12 is_stmt 0 discriminator 3 view .LVU152
+ 593 0020 164B     		ldr	r3, .L38+4
+ 594 0022 5F68     		ldr	r7, [r3, #4]
+ 595              	.LVL59:
+  26:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
+ 596              		.loc 2 26 3 is_stmt 1 discriminator 3 view .LVU153
+  26:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
+ 597              		.loc 2 26 26 is_stmt 0 discriminator 3 view .LVU154
+ 598 0024 FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
+ 599              	.LVL60:
+  26:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
+ 600              		.loc 2 26 12 discriminator 3 view .LVU155
+ 601 0028 1549     		ldr	r1, .L38+8
+ 602 002a A1FB0031 		umull	r3, r1, r1, r0
+ 603 002e 890C     		lsrs	r1, r1, #18
+ 604              	.LVL61:
+  27:util/../util/DWT_Delay.h ****   while ((DWT->CYCCNT - au32_initial_ticks) < au32_microseconds-au32_ticks);
+ 605              		.loc 2 27 3 is_stmt 1 discriminator 3 view .LVU156
+  27:util/../util/DWT_Delay.h ****   while ((DWT->CYCCNT - au32_initial_ticks) < au32_microseconds-au32_ticks);
+ 606              		.loc 2 27 21 is_stmt 0 discriminator 3 view .LVU157
+ 607 0030 01FB06F6 		mul	r6, r1, r6
+ 608              		.loc 2 28 3 is_stmt 1 discriminator 3 view .LVU158
+ 609              	.L33:
+ 610              		.loc 2 28 76 view .LVU159
+ 611              		.loc 2 28 9 view .LVU160
+ 612              		.loc 2 28 14 is_stmt 0 view .LVU161
+ 613 0034 114B     		ldr	r3, .L38+4
+ 614 0036 5B68     		ldr	r3, [r3, #4]
+ 615              		.loc 2 28 23 view .LVU162
+ 616 0038 DB1B     		subs	r3, r3, r7
+ 617              		.loc 2 28 64 view .LVU163
+ 618 003a 721A     		subs	r2, r6, r1
+ 619              		.loc 2 28 9 view .LVU164
+ 620 003c 9342     		cmp	r3, r2
+ 621 003e F9D3     		bcc	.L33
+ 622              	.LVL62:
+ 623              		.loc 2 28 9 view .LVU165
+ 624              	.LBE33:
+ 625              	.LBE32:
+  78:ECUAL/StepMotor/StepMotor.c ****         HAL_GPIO_WritePin(PORT, STEP, 1);
+ 626              		.loc 1 78 9 is_stmt 1 discriminator 3 view .LVU166
+ 627 0040 0122     		movs	r2, #1
+ 628 0042 2021     		movs	r1, #32
+ 629 0044 0C48     		ldr	r0, .L38
+ 630 0046 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 631              	.LVL63:
+  79:ECUAL/StepMotor/StepMotor.c ****         DWT_Delay_us(500);
+ 632              		.loc 1 79 9 discriminator 3 view .LVU167
+ 633 004a 4FF4FA76 		mov	r6, #500
+ 634              	.LVL64:
+ 635              	.LBB34:
+ 636              	.LBI34:
+  23:util/../util/DWT_Delay.h **** {
+ 637              		.loc 2 23 22 discriminator 3 view .LVU168
+ 638              	.LBB35:
+ARM GAS  C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s 			page 15
+
+
+  25:util/../util/DWT_Delay.h ****   uint32_t au32_ticks = (HAL_RCC_GetHCLKFreq() / 1000000);
+ 639              		.loc 2 25 3 discriminator 3 view .LVU169
+  25:util/../util/DWT_Delay.h ****   uint32_t au32_ticks = (HAL_RCC_GetHCLKFreq() / 1000000);
+ 640              		.loc 2 25 12 is_stmt 0 discriminator 3 view .LVU170
+ 641 004e 0B4B     		ldr	r3, .L38+4
+ 642 0050 5F68     		ldr	r7, [r3, #4]
+ 643              	.LVL65:
+  26:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
+ 644              		.loc 2 26 3 is_stmt 1 discriminator 3 view .LVU171
+  26:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
+ 645              		.loc 2 26 26 is_stmt 0 discriminator 3 view .LVU172
+ 646 0052 FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
+ 647              	.LVL66:
+  26:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
+ 648              		.loc 2 26 12 discriminator 3 view .LVU173
+ 649 0056 0A49     		ldr	r1, .L38+8
+ 650 0058 A1FB0031 		umull	r3, r1, r1, r0
+ 651 005c 890C     		lsrs	r1, r1, #18
+ 652              	.LVL67:
+  27:util/../util/DWT_Delay.h ****   while ((DWT->CYCCNT - au32_initial_ticks) < au32_microseconds-au32_ticks);
+ 653              		.loc 2 27 3 is_stmt 1 discriminator 3 view .LVU174
+  27:util/../util/DWT_Delay.h ****   while ((DWT->CYCCNT - au32_initial_ticks) < au32_microseconds-au32_ticks);
+ 654              		.loc 2 27 21 is_stmt 0 discriminator 3 view .LVU175
+ 655 005e 01FB06F6 		mul	r6, r1, r6
+ 656              		.loc 2 28 3 is_stmt 1 discriminator 3 view .LVU176
+ 657              	.L34:
+ 658              		.loc 2 28 76 view .LVU177
+ 659              		.loc 2 28 9 view .LVU178
+ 660              		.loc 2 28 14 is_stmt 0 view .LVU179
+ 661 0062 064B     		ldr	r3, .L38+4
+ 662 0064 5B68     		ldr	r3, [r3, #4]
+ 663              		.loc 2 28 23 view .LVU180
+ 664 0066 DB1B     		subs	r3, r3, r7
+ 665              		.loc 2 28 64 view .LVU181
+ 666 0068 721A     		subs	r2, r6, r1
+ 667              		.loc 2 28 9 view .LVU182
+ 668 006a 9342     		cmp	r3, r2
+ 669 006c F9D3     		bcc	.L34
+ 670              	.LVL68:
+ 671              		.loc 2 28 9 view .LVU183
+ 672              	.LBE35:
+ 673              	.LBE34:
+  74:ECUAL/StepMotor/StepMotor.c ****     {
+ 674              		.loc 1 74 35 is_stmt 1 discriminator 3 view .LVU184
+ 675 006e 0134     		adds	r4, r4, #1
+ 676              	.LVL69:
+  74:ECUAL/StepMotor/StepMotor.c ****     {
+ 677              		.loc 1 74 35 is_stmt 0 discriminator 3 view .LVU185
+ 678 0070 A4B2     		uxth	r4, r4
+ 679              	.LVL70:
+  74:ECUAL/StepMotor/StepMotor.c ****     {
+ 680              		.loc 1 74 35 discriminator 3 view .LVU186
+ 681 0072 CCE7     		b	.L32
+ 682              	.L37:
+  74:ECUAL/StepMotor/StepMotor.c ****     {
+ 683              		.loc 1 74 35 discriminator 3 view .LVU187
+ 684              	.LBE31:
+ARM GAS  C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s 			page 16
+
+
+  80:ECUAL/StepMotor/StepMotor.c ****     }
+  81:ECUAL/StepMotor/StepMotor.c ****     return;
+  82:ECUAL/StepMotor/StepMotor.c **** }...
+ 685              		.loc 1 82 1 view .LVU188
+ 686 0074 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 687              	.LVL71:
+ 688              	.L39:
+ 689              		.loc 1 82 1 view .LVU189
+ 690 0076 00BF     		.align	2
+ 691              	.L38:
+ 692 0078 000C0140 		.word	1073810432
+ 693 007c 001000E0 		.word	-536866816
+ 694 0080 83DE1B43 		.word	1125899907
+ 695              		.cfi_endproc
+ 696              	.LFE72:
+ 698              		.text
+ 699              	.Letext0:
+ 700              		.file 3 "c:\\users\\84935\\stm32f103c8t6\\tools\\gcc-arm-none-eabi-10.3-2021.10-win32\\gcc-arm-non
+ 701              		.file 4 "c:\\users\\84935\\stm32f103c8t6\\tools\\gcc-arm-none-eabi-10.3-2021.10-win32\\gcc-arm-non
+ 702              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
+ 703              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 704              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
+ 705              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 706              		.file 9 "ECUAL/StepMotor/StepMotor.h"
+ARM GAS  C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s 			page 17
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 StepMotor.c
+C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s:18     .text.stepInit:00000000 $t
+C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s:24     .text.stepInit:00000000 stepInit
+C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s:60     .text.stepInit:00000024 $d
+C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s:65     .text.brake:00000000 $t
+C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s:71     .text.brake:00000000 brake
+C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s:100    .text.brake:0000001c $d
+C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s:105    .text.changeDir:00000000 $t
+C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s:111    .text.changeDir:00000000 changeDir
+C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s:144    .text.changeDir:00000018 $d
+C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s:149    .text.speedCtrl:00000000 $t
+C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s:155    .text.speedCtrl:00000000 speedCtrl
+C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s:482    .text.speedCtrl:0000012c $d
+C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s:494    .text.angle2Step:00000000 $t
+C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s:500    .text.angle2Step:00000000 angle2Step
+C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s:531    .text.angle2Step:00000018 $d
+C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s:537    .text.positionCtrl:00000000 $t
+C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s:543    .text.positionCtrl:00000000 positionCtrl
+C:\Users\84935\AppData\Local\Temp\ccZgEcMk.s:692    .text.positionCtrl:00000078 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_WritePin
+HAL_RCC_GetHCLKFreq
+__aeabi_i2d
+__aeabi_ddiv
+__aeabi_d2uiz

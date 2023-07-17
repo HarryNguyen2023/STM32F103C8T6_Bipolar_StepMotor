@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "name": "Cortex Debug",
+            "type": "cortex-debug",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "executable": "./build/STM32F103C8T6_StepMotor.elf",
+            "servertype": "openocd",
+            "device": "STM32F103C8T6",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32f1x.cfg"
+            ]
+        }
+    ],
+    "version": "0.2.0"
+}
