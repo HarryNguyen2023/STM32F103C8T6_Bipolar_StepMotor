@@ -55,6 +55,7 @@ Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c \
 Core/Src/system_stm32f1xx.c \
 ECUAL/StepMotor/StepMotor.c \
+ECUAL/UART/STM32_UART.c \
 util/DWT_Delay.c
 
 # ASM sources
@@ -118,6 +119,7 @@ C_INCLUDES =  \
 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include \
 -IDrivers/CMSIS/Include \
 -IECUAL/StepMotor \
+-IECUAL/UART \
 -Iutil
 
 

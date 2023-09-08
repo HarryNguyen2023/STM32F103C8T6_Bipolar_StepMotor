@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
+ARM GAS  C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -41,7 +41,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
   34              		.cfi_offset 4, -8
   35              		.cfi_offset 14, -4
    6:ECUAL/StepMotor/StepMotor.c ****     // Enable the motor driver
-   7:ECUAL/StepMotor/StepMotor.c ****     HAL_GPIO_WritePin(GPIOB, EN, 0);
+   7:ECUAL/StepMotor/StepMotor.c ****     HAL_GPIO_WritePin(PORT, EN, 0);
   36              		.loc 1 7 5 view .LVU1
   37 0002 084C     		ldr	r4, .L3
   38 0004 0022     		movs	r2, #0
@@ -50,7 +50,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
   41 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
   42              	.LVL0:
    8:ECUAL/StepMotor/StepMotor.c ****     // Intiiate the direction of the motor
-   9:ECUAL/StepMotor/StepMotor.c ****     HAL_GPIO_WritePin(GPIOB, DIR, 1);
+   9:ECUAL/StepMotor/StepMotor.c ****     HAL_GPIO_WritePin(PORT, DIR, 1);
   43              		.loc 1 9 5 view .LVU2
   44 000e 0122     		movs	r2, #1
   45 0010 2021     		movs	r1, #32
@@ -58,10 +58,10 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
   47 0014 FFF7FEFF 		bl	HAL_GPIO_WritePin
   48              	.LVL1:
   10:ECUAL/StepMotor/StepMotor.c ****     // Initiate the step pin
-ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 2
+ARM GAS  C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s 			page 2
 
 
-  11:ECUAL/StepMotor/StepMotor.c ****     HAL_GPIO_WritePin(GPIOB, STEP, 0);
+  11:ECUAL/StepMotor/StepMotor.c ****     HAL_GPIO_WritePin(PORT, STEP, 0);
   49              		.loc 1 11 5 view .LVU3
   50 0018 0022     		movs	r2, #0
   51 001a 1021     		movs	r1, #16
@@ -99,7 +99,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
   80              		.cfi_offset 4, -8
   81              		.cfi_offset 14, -4
   17:ECUAL/StepMotor/StepMotor.c ****     // Disable the motor driver
-  18:ECUAL/StepMotor/StepMotor.c ****     HAL_GPIO_WritePin(GPIOB, EN, 1);
+  18:ECUAL/StepMotor/StepMotor.c ****     HAL_GPIO_WritePin(PORT, EN, 1);
   82              		.loc 1 18 5 view .LVU6
   83 0002 064C     		ldr	r4, .L7
   84 0004 0122     		movs	r2, #1
@@ -108,7 +108,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
   87 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
   88              	.LVL3:
   19:ECUAL/StepMotor/StepMotor.c ****     // Initiate the step pin
-  20:ECUAL/StepMotor/StepMotor.c ****     HAL_GPIO_WritePin(GPIOB, STEP, 0);
+  20:ECUAL/StepMotor/StepMotor.c ****     HAL_GPIO_WritePin(PORT, STEP, 0);
   89              		.loc 1 20 5 view .LVU7
   90 000e 0022     		movs	r2, #0
   91 0010 1021     		movs	r1, #16
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
   21:ECUAL/StepMotor/StepMotor.c **** }
   95              		.loc 1 21 1 is_stmt 0 view .LVU8
   96 0018 10BD     		pop	{r4, pc}
-ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 3
+ARM GAS  C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s 			page 3
 
 
   97              	.L8:
@@ -160,7 +160,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
  130              		.loc 1 26 14 view .LVU14
  131 000a 0270     		strb	r2, [r0]
   27:ECUAL/StepMotor/StepMotor.c ****     // Change the state of the DIR pin
-  28:ECUAL/StepMotor/StepMotor.c ****     HAL_GPIO_WritePin(GPIOB, DIR, *cur_dir);
+  28:ECUAL/StepMotor/StepMotor.c ****     HAL_GPIO_WritePin(PORT, DIR, *cur_dir);
  132              		.loc 1 28 5 is_stmt 1 view .LVU15
  133 000c 2021     		movs	r1, #32
  134 000e 0248     		ldr	r0, .L11
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
  145              		.cfi_endproc
  146              	.LFE69:
  148              		.section	.text.speedCtrl,"ax",%progbits
-ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 4
+ARM GAS  C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s 			page 4
 
 
  149              		.align	1
@@ -217,28 +217,28 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
  178              	.L13:
   35:ECUAL/StepMotor/StepMotor.c ****     {
   36:ECUAL/StepMotor/StepMotor.c ****         case speed1:
-  37:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(GPIOB, STEP, 0);
+  37:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(PORT, STEP, 0);
   38:ECUAL/StepMotor/StepMotor.c ****             DWT_Delay_us(1000);
-  39:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(GPIOB, STEP, 1);
+  39:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(PORT, STEP, 1);
   40:ECUAL/StepMotor/StepMotor.c ****             DWT_Delay_us(1000);
   41:ECUAL/StepMotor/StepMotor.c ****             break;
   42:ECUAL/StepMotor/StepMotor.c ****         
   43:ECUAL/StepMotor/StepMotor.c ****         case speed2:
-  44:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(GPIOB, STEP, 0);
+  44:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(PORT, STEP, 0);
   45:ECUAL/StepMotor/StepMotor.c ****             DWT_Delay_us(750);
-  46:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(GPIOB, STEP, 1);
+  46:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(PORT, STEP, 1);
   47:ECUAL/StepMotor/StepMotor.c ****             DWT_Delay_us(750);
   48:ECUAL/StepMotor/StepMotor.c ****             break;
   49:ECUAL/StepMotor/StepMotor.c ****         
   50:ECUAL/StepMotor/StepMotor.c ****         case speed3:
-  51:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(GPIOB, STEP, 0);
+  51:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(PORT, STEP, 0);
   52:ECUAL/StepMotor/StepMotor.c ****             DWT_Delay_us(500);
-  53:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(GPIOB, STEP, 1);
+  53:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(PORT, STEP, 1);
   54:ECUAL/StepMotor/StepMotor.c ****             DWT_Delay_us(500);
   55:ECUAL/StepMotor/StepMotor.c ****             break;
   56:ECUAL/StepMotor/StepMotor.c ****     }
   57:ECUAL/StepMotor/StepMotor.c **** }
-ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 5
+ARM GAS  C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s 			page 5
 
 
  179              		.loc 1 57 1 is_stmt 0 view .LVU21
@@ -255,7 +255,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
  188              		.loc 1 37 13 is_stmt 0 view .LVU23
  189 0016 FFF7FEFF 		bl	HAL_GPIO_WritePin
  190              	.LVL12:
-  38:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(GPIOB, STEP, 1);
+  38:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(PORT, STEP, 1);
  191              		.loc 1 38 13 is_stmt 1 view .LVU24
  192 001a 4FF47A74 		mov	r4, #1000
  193              	.LVL13:
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
  204              		.loc 2 26 3 is_stmt 1 view .LVU28
  205              		.loc 2 26 26 is_stmt 0 view .LVU29
  206 0022 FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
-ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 6
+ARM GAS  C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s 			page 6
 
 
  207              	.LVL15:
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
   26:util/../util/DWT_Delay.h ****   au32_microseconds *= au32_ticks;
  253              		.loc 2 26 26 is_stmt 0 view .LVU47
  254 0050 FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
-ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 7
+ARM GAS  C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s 			page 7
 
 
  255              	.LVL21:
@@ -403,7 +403,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
  289              		.loc 1 44 13 is_stmt 0 view .LVU60
  290 0074 FFF7FEFF 		bl	HAL_GPIO_WritePin
  291              	.LVL25:
-  45:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(GPIOB, STEP, 1);
+  45:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(PORT, STEP, 1);
  292              		.loc 1 45 13 is_stmt 1 view .LVU61
  293 0078 40F2EE24 		movw	r4, #750
  294              	.LVL26:
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
  300              		.loc 2 25 12 is_stmt 0 view .LVU64
  301 007c 2C4B     		ldr	r3, .L25+4
  302 007e 5D68     		ldr	r5, [r3, #4]
-ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 8
+ARM GAS  C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s 			page 8
 
 
  303              	.LVL27:
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
   25:util/../util/DWT_Delay.h ****   uint32_t au32_ticks = (HAL_RCC_GetHCLKFreq() / 1000000);
  348              		.loc 2 25 12 is_stmt 0 view .LVU82
  349 00aa 214B     		ldr	r3, .L25+4
-ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 9
+ARM GAS  C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s 			page 9
 
 
  350 00ac 5D68     		ldr	r5, [r3, #4]
@@ -530,7 +530,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
  389              		.loc 1 51 13 is_stmt 0 view .LVU97
  390 00d2 FFF7FEFF 		bl	HAL_GPIO_WritePin
  391              	.LVL38:
-  52:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(GPIOB, STEP, 1);
+  52:ECUAL/StepMotor/StepMotor.c ****             HAL_GPIO_WritePin(PORT, STEP, 1);
  392              		.loc 1 52 13 is_stmt 1 view .LVU98
  393 00d6 4FF4FA74 		mov	r4, #500
  394              	.LVL39:
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
  396              	.LBI22:
   23:util/../util/DWT_Delay.h **** {
  397              		.loc 2 23 22 view .LVU99
-ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 10
+ARM GAS  C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s 			page 10
 
 
  398              	.LBB23:
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
  443              	.LBB24:
  444              	.LBI24:
   23:util/../util/DWT_Delay.h **** {
-ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 11
+ARM GAS  C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s 			page 11
 
 
  445              		.loc 2 23 22 view .LVU117
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
  493              		.section	.text.angle2Step,"ax",%progbits
  494              		.align	1
  495              		.global	angle2Step
-ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 12
+ARM GAS  C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s 			page 12
 
 
  496              		.syntax unified
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
  545              	.LFB72:
   66:ECUAL/StepMotor/StepMotor.c **** 
   67:ECUAL/StepMotor/StepMotor.c **** // Function to control the position of the step motor 
-ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 13
+ARM GAS  C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s 			page 13
 
 
   68:ECUAL/StepMotor/StepMotor.c **** void positionCtrl(uint16_t step)
@@ -760,7 +760,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
  576 000e AC42     		cmp	r4, r5
  577 0010 30D2     		bcs	.L37
   74:ECUAL/StepMotor/StepMotor.c ****     {
-  75:ECUAL/StepMotor/StepMotor.c ****         HAL_GPIO_WritePin(GPIOB, STEP, 0);
+  75:ECUAL/StepMotor/StepMotor.c ****         HAL_GPIO_WritePin(PORT, STEP, 0);
  578              		.loc 1 75 9 is_stmt 1 discriminator 3 view .LVU148
  579 0012 0022     		movs	r2, #0
  580 0014 1021     		movs	r1, #16
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
  590              	.LBB33:
   25:util/../util/DWT_Delay.h ****   uint32_t au32_ticks = (HAL_RCC_GetHCLKFreq() / 1000000);
  591              		.loc 2 25 3 discriminator 3 view .LVU151
-ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 14
+ARM GAS  C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s 			page 14
 
 
   25:util/../util/DWT_Delay.h ****   uint32_t au32_ticks = (HAL_RCC_GetHCLKFreq() / 1000000);
@@ -821,7 +821,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
  623              		.loc 2 28 9 view .LVU165
  624              	.LBE33:
  625              	.LBE32:
-  77:ECUAL/StepMotor/StepMotor.c ****         HAL_GPIO_WritePin(GPIOB, STEP, 1);
+  77:ECUAL/StepMotor/StepMotor.c ****         HAL_GPIO_WritePin(PORT, STEP, 1);
  626              		.loc 1 77 9 is_stmt 1 discriminator 3 view .LVU166
  627 0040 0122     		movs	r2, #1
  628 0042 1021     		movs	r1, #16
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
  637              		.loc 2 23 22 discriminator 3 view .LVU168
  638              	.LBB35:
   25:util/../util/DWT_Delay.h ****   uint32_t au32_ticks = (HAL_RCC_GetHCLKFreq() / 1000000);
-ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 15
+ARM GAS  C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s 			page 15
 
 
  639              		.loc 2 25 3 discriminator 3 view .LVU169
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
  683              		.loc 1 73 35 discriminator 3 view .LVU187
  684              	.LBE31:
   79:ECUAL/StepMotor/StepMotor.c ****     }
-ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 16
+ARM GAS  C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s 			page 16
 
 
   80:ECUAL/StepMotor/StepMotor.c ****     return;
@@ -924,29 +924,29 @@ ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 1
  704              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
  705              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
  706              		.file 9 "ECUAL/StepMotor/StepMotor.h"
-ARM GAS  C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s 			page 17
+ARM GAS  C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s 			page 17
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 StepMotor.c
-C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s:18     .text.stepInit:00000000 $t
-C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s:24     .text.stepInit:00000000 stepInit
-C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s:60     .text.stepInit:00000024 $d
-C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s:65     .text.brake:00000000 $t
-C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s:71     .text.brake:00000000 brake
-C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s:100    .text.brake:0000001c $d
-C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s:105    .text.changeDir:00000000 $t
-C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s:111    .text.changeDir:00000000 changeDir
-C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s:144    .text.changeDir:00000018 $d
-C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s:149    .text.speedCtrl:00000000 $t
-C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s:155    .text.speedCtrl:00000000 speedCtrl
-C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s:482    .text.speedCtrl:0000012c $d
-C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s:494    .text.angle2Step:00000000 $t
-C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s:500    .text.angle2Step:00000000 angle2Step
-C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s:531    .text.angle2Step:00000018 $d
-C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s:537    .text.positionCtrl:00000000 $t
-C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s:543    .text.positionCtrl:00000000 positionCtrl
-C:\Users\84935\AppData\Local\Temp\ccqxd3XO.s:692    .text.positionCtrl:00000078 $d
+C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s:18     .text.stepInit:00000000 $t
+C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s:24     .text.stepInit:00000000 stepInit
+C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s:60     .text.stepInit:00000024 $d
+C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s:65     .text.brake:00000000 $t
+C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s:71     .text.brake:00000000 brake
+C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s:100    .text.brake:0000001c $d
+C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s:105    .text.changeDir:00000000 $t
+C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s:111    .text.changeDir:00000000 changeDir
+C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s:144    .text.changeDir:00000018 $d
+C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s:149    .text.speedCtrl:00000000 $t
+C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s:155    .text.speedCtrl:00000000 speedCtrl
+C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s:482    .text.speedCtrl:0000012c $d
+C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s:494    .text.angle2Step:00000000 $t
+C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s:500    .text.angle2Step:00000000 angle2Step
+C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s:531    .text.angle2Step:00000018 $d
+C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s:537    .text.positionCtrl:00000000 $t
+C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s:543    .text.positionCtrl:00000000 positionCtrl
+C:\Users\84935\AppData\Local\Temp\cc71ZpcP.s:692    .text.positionCtrl:00000078 $d
 
 UNDEFINED SYMBOLS
 HAL_GPIO_WritePin

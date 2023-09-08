@@ -1,27 +1,9 @@
-/* USER CODE BEGIN Header */
-/**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2023 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
-/* USER CODE END Header */
-/* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include "../../ECUAL/StepMotor/StepMotor.h"
+#include "../../ECUAL/UART/STM32_UART.h"
 
 UART_HandleTypeDef huart1;
 DMA_HandleTypeDef hdma_usart1_rx;
@@ -33,9 +15,10 @@ static void MX_USART1_UART_Init(void);
 void commandExec(uint16_t data_size);
 
 // Define the length of the receive buffer
-#define BUFFER_SIZE 5
+#define BUFFER_SIZE 20
 uint8_t rcv_buffer[BUFFER_SIZE] = {0};
-uint8_t send_msg[30];
+uint8_t tx_buffer[45];
+int control_command[2];
 
 uint8_t mode = 0;
 uint8_t command;
@@ -53,11 +36,8 @@ int main(void)
   
   // Initiate the delay module
   DWT_Delay_Init();
-
-  // Configure the USART DMA module
-  HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rcv_buffer, BUFFER_SIZE);
-  // Disable the half transfer interrupt
-  __HAL_DMA_DISABLE_IT(&hdma_usart1_rx, DMA_IT_HT);
+  // Initiate the UART IDLE line detection for receprion
+  STM32_UART_IDLE_Start(&huart1, &hdma_usart1_rx, rcv_buffer, BUFFER_SIZE);
   // Initiate the step motor connection
   stepInit();
 
@@ -86,14 +66,8 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
   // Check if data come on USART1 channel
   if(huart->Instance == USART1)
   {
-    // Send back receive messagefor debugging
-    sprintf(send_msg,"Received: %s Size: %u\r\n",rcv_buffer,Size);
-    HAL_UART_Transmit(huart, send_msg, strlen(send_msg), 100);
-
-    // Restart the receipt
-    HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rcv_buffer, BUFFER_SIZE);
-    __HAL_DMA_DISABLE_IT(&hdma_usart1_rx, DMA_IT_HT);
-
+    // Initiate the UART IDLE line detection for receprion
+    STM32_UART_IDLE_Start(&huart1, &hdma_usart1_rx, rcv_buffer, BUFFER_SIZE);
     // Hadling the command from PC
     commandExec(Size); 
   }
@@ -109,12 +83,12 @@ void commandExec(uint16_t data_size)
     else if(rcv_buffer[0] == speed1 || rcv_buffer[0] == speed2 || rcv_buffer[0] == speed3)
       mode = speed;
     else
-      HAL_UART_Transmit(&huart1, (char*)"Invalid command!\r\n", 18, 100);
+      STM32_UART_sendString(&huart1, (uint8_t*)"Invalid command\r\n");
   }
   else
   {
     mode = pos;
-    positionCtrl(angle2Step(atoi(rcv_buffer)));
+    positionCtrl(angle2Step(atoi((char*)rcv_buffer)));
   }
 }
 
@@ -173,7 +147,7 @@ static void MX_USART1_UART_Init(void)
 
   /* USER CODE END USART1_Init 1 */
   huart1.Instance = USART1;
-  huart1.Init.BaudRate = 9600;
+  huart1.Init.BaudRate = 57600;
   huart1.Init.WordLength = UART_WORDLENGTH_8B;
   huart1.Init.StopBits = UART_STOPBITS_1;
   huart1.Init.Parity = UART_PARITY_NONE;
